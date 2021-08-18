@@ -1,0 +1,48 @@
+.container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.75rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.8rem rgba(0, 0, 0, .07);
+}
+
+.delete {
+    margin-left: auto;
+    border-radius: 100%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: #c0392b;
+    opacity: 0;
+    transition-duration: 0.2s;
+    transition-property: opacity, background-color, color, transform;
+    font-size: 3rem;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+
+.text {
+    margin-left: 2rem;
+    font-size: 2rem;
+}
+
+.container:hover .delete {
+    opacity: 0.25;
+}
+
+.container .delete:hover {
+    transform: scale(1.2);
+    opacity: 0.75;
+}
+
+.container .delete:active {
+    transform: scale(0.75);
+    opacity: 1;
+}

@@ -1,0 +1,23 @@
+.container {
+    width: 100%;
+    text-align: center;
+    margin: auto;
+}
+
+.notesList {
+    margin: 3rem auto auto;
+    width: 50%;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2rem;
+    box-shadow: 0 0 0.75rem rgba(0, 0, 0, .05);
+    border-radius: 0.55rem;
+}
+
+@media (orientation: portrait) {
+    .notesList {
+        width: 95%;
+    }
+}
