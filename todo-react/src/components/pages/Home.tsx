@@ -1,24 +1,16 @@
 import {Form} from '../form/Form'
-import {Note} from '../../types/Note'
 import {Notes} from '../notes/Notes'
+import {AppState} from '../../types/AppState'
+import React from 'react'
 
 
 export const Home = (): JSX.Element => {
-    const notes: Array<Note> = [{
-        text: 'To do',
-        done: false,
-        id: 'rghtrugurg'
-    }, {
-        text: 'To do 2',
-        done: true,
-        id: 'rgrg48%#&'
-    }
-    ]
+    const main: React.MutableRefObject<AppState> = React.useRef(new AppState())
 
     return (
         <>
-            <Form/>
-            <Notes notes={notes}/>
+            <Form mainState={main.current}/>
+            <Notes mainState={main.current} notes={main.current.notes}/>
         </>
     )
 }
