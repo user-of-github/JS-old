@@ -7,6 +7,17 @@
     flex-direction: column;
     text-align: center;
     width: 100%;
+    animation-duration: 1s;
+    animation-name: Appearing;
+}
+
+@keyframes Appearing {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .promo {

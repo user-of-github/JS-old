@@ -1,0 +1,23 @@
+.item-enter {
+    transform: translateX(-100%);
+    opacity: 0;
+    transition-duration: 0.2s;
+    transition-timing-function: cubic-bezier(1,-0.05,.44,1.82);
+    transition-property: opacity, transform;
+}
+.item-enter-active {
+    opacity: 1;
+    transition-duration: 0.2s;
+    transition-timing-function: cubic-bezier(1,-0.05,.44,1.82);
+    transform: translateX(0);
+}
+.item-exit {
+    opacity: 1;
+}
+.item-exit-active {
+    transform: translateX(-100%);
+    opacity: 0;
+    transition-duration: 0.2s;
+    transition-timing-function: cubic-bezier(1, 0, .15, 1.8);
+    transition-property: opacity, transform;
+}

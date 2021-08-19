@@ -1,0 +1,17 @@
+.container {
+    position: relative;
+    width: 100%;
+    margin: auto;
+
+    animation-duration: 0.75s;
+    animation-name: Appearing;
+}
+
+@keyframes Appearing {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

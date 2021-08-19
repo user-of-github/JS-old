@@ -51,6 +51,10 @@
 
 @media (orientation: portrait) {
     .input {
+        width: 100%;
+    }
+
+    .row {
         width: 95%;
     }
 }

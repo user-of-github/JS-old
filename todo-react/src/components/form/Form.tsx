@@ -17,6 +17,7 @@ export const Form = (props: { mainState: AppState }): JSX.Element => {
                        placeholder="Enter note text"
                        onKeyPress={event => event.key === ENTER_KEY_CODE && addNoteEvent(event, props.mainState)}
                        ref={inputRef}
+                       maxLength={100}
                 />
                 <button className={Style.add}
                         onClick={event => addNoteEvent(event, props.mainState)}>

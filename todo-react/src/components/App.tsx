@@ -2,7 +2,7 @@ import React from 'react'
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
 
 import {About} from './pages/About/About'
-import {Home} from './pages/Home'
+import {Home} from './pages/Home/Home'
 import {Navbar} from './navbar/Navbar'
 
 import Style from './App.module.css'

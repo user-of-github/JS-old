@@ -1,15 +1,26 @@
-# _Notes | To Do_
+## Notes List | To Do List
+#### _Desktop Web Application_
+###### Project was created and deployed for educational purposes & practice
 
-## [LIVE DEMO ←]()  
+## [_LIVE DEMO_](http://note-todo-react-project.surge.sh/)  
 &nbsp;  
 
 #### Stack:  
-* React
-* TypeScript
-* MobX
-
+* _React_
+* _TypeScript_
+* _MobX_
+#### Features:  
+* _Navigation via React-Router-Dom_
+* _LocalStorage for saving users' notes_
+* _Only Functional Components_
+* _Some hooks_
+* _Animations (React Transition Group, CSS Transition, CSS Animation Keyframes)_
+* _Attractive UI_
+* _Separation on TypeScript classes & interfaces_
+* _React CSS Modules for every component_
+* _Deployed on SURGE_
+* _Other.._
+&nbsp;
 &nbsp;  
-_[INSPIRED BY ←](https://www.youtube.com/watch?v=V1rhxheJg4A&t=1030s)_
 &nbsp;  
-&nbsp;  
-###### Copyright © 2021 | All Rights Reserved
+###### Copyright © 2021, August | All Rights Reserved

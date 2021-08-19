@@ -5,11 +5,61 @@
     padding: 1.5rem 2rem;
     margin-bottom: 1.75rem;
     border-radius: 0.5rem;
-    box-shadow: 0 0 0.8rem rgba(0, 0, 0, .07);
+    box-shadow: 0 0 0.7rem rgba(0, 0, 0, .07);
+    background-color: #f5f6fa;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.inputGroup input {
+    display: none;
+}
+
+.inputGroup label {
+    position: relative;
+}
+
+.inputGroup label::after {
+    content: "";
+    width: 25px;
+    height: 25px;
+    background-image: url("../../../img/check-circle.svg");
+    background-size: contain;
+    position: absolute;
+    margin: auto;
+    top: -10px;
+    left: -10px;
+    transform: scale(0) rotateZ(180deg);
+    transition-timing-function: cubic-bezier(1, 0, .15, 1.8);
+    transition-property: opacity, transform;
+    transition-duration: 0.4s;
+}
+
+.inputGroup input:checked + label::after {
+    transform: scale(1) rotateZ(0);
+    opacity: 1;
+}
+
+.inputGroup label::before {
+    border: 2px solid #27ae60;
+    content: "";
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+    position: absolute;
+    top: -9px;
+    left: -9px;
+    background-color: transparent;
 }
 
 .delete {
-    margin-left: auto;
     border-radius: 100%;
     border: none;
     outline: none;
@@ -19,18 +69,31 @@
     justify-content: center;
     align-items: center;
     color: #c0392b;
-    opacity: 0;
+    opacity: 0.1;
     transition-duration: 0.2s;
     transition-property: opacity, background-color, color, transform;
     font-size: 3rem;
     font-weight: 900;
     cursor: pointer;
+    margin-left: 1.5rem;
 }
 
 
 .text {
-    margin-left: 2rem;
-    font-size: 2rem;
+    margin-left: 4rem;
+    padding-right: 1rem;
+    font-size: 2.5rem;
+    opacity: 0.85;
+    font-style: italic;
+
+    white-space: nowrap; /* Запрещаем перенос строк */
+    overflow: hidden; /* Обрезаем все, что не помещается в область */
+    text-overflow: ellipsis; /* Добавляем многоточие */
+}
+
+.done {
+    opacity: 0.5;
+    text-decoration: line-through;
 }
 
 .container:hover .delete {
@@ -45,4 +108,15 @@
 .container .delete:active {
     transform: scale(0.75);
     opacity: 1;
+}
+
+.date {
+    margin-left: auto;
+    opacity: 0.75;
+    font-size: 1.5rem;
+    vertical-align: middle;
+    padding-left: 0.75rem;
+    border-left: 1px solid black;
+    font-weight: 100;
+    white-space: nowrap;
 }
