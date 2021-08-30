@@ -7,4 +7,5 @@ export interface Theme {
     axesWidth: number
     drawAxes: boolean
     drawArrows: boolean
+    dotsRadius: number
 }

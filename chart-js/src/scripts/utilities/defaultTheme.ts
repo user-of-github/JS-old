@@ -9,6 +9,7 @@ export const createDefaultTheme = (): Theme => {
         gridColor: 'rgba(44, 58, 71,0.1)',
         axesWidth: 7,
         drawAxes: true,
-        drawArrows: true
+        drawArrows: true,
+        dotsRadius: 3
     }
 }

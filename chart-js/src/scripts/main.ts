@@ -1,12 +1,14 @@
 import {ChartState} from './types/ChartState'
 import {Point} from './types/Point'
+import {getRandomPointsSet} from './utilities/getRandomPointsSet'
 
 const runApplication = (): void => {
     const canvas: HTMLCanvasElement = document.getElementById('canvas') as HTMLCanvasElement
-    const testPoints1: Array<Point> = [{x: 0, y: -1}, {x: 30, y: -0}, {x: 0, y: 2}, {x: -6, y: 0}]
-    const testPoints2: Array<Point> = [{x: 1, y: 2}, {x: 1, y: 2}, {x: 1, y: 2}, {x: 1, y: 2}]
-    const testPoints3: Array<Point> = [{x: -1, y: 2}, {x: -1, y: 2}, {x: -1, y: 2}, {x: -1, y: 2}]
-    const mainState: ChartState = new ChartState(testPoints1, canvas)
+    const mainState: ChartState = new ChartState([
+        {x: 0, y: 2}, {x: -5, y: 6},
+        {x: -1, y: 2}, {x: -10, y: 7},
+        {x: -2, y: 2}, {x: -20, y: 8},
+    ], canvas)
     mainState.render()
 }
 
