@@ -1,14 +1,13 @@
 {
+  "name": "chart-js",
+  "version": "1.0.0",
+  "description": "Charts TypeScript",
+  "author": "Nikita",
+  "license": "MIT",
   "dependencies": {
     "parcel": "^2.0.0-rc.0",
     "typescript": "^4.3.5"
   },
-  "name": "chart-js",
-  "version": "1.0.0",
-  "description": "Trial to implement correct charts visualization via TypeScript",
-  "main": "index.js",
-  "author": "Nikita",
-  "license": "MIT",
   "scripts": {
     "start": "parcel ./src/index.html",
     "build": "parcel build ./src/index.html"
