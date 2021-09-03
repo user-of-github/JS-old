@@ -1,11 +1,14 @@
 import {ChartPlugin} from '../chart/types/ChartPlugin'
+import {getChartData} from '../data/data'
+import {transformTelegramData} from '../chart/utilities/transformTelegramData'
 
 
 const startApplication = (): void => {
     const chart: ChartPlugin = new ChartPlugin(
         document.getElementById('canvas') as HTMLCanvasElement,
-        [[0, 0], [200, 300], [400, 200], [600, 300], [800, 800], [900, 100]]
+        transformTelegramData(getChartData())
     )
+
 
     chart.runRender()
 }

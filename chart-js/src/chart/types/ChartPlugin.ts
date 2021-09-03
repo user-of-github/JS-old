@@ -1,27 +1,28 @@
 import {CanvasData} from './CanvasData'
 import {defaultParameters} from '../utilities/default'
+import {TransformedChartData} from './TransformedChartData'
 
 
 export class ChartPlugin {
     private readonly canvas: CanvasData
-    private readonly data: any
+    private readonly data: TransformedChartData
 
     public constructor(canvasHTMLRef: HTMLCanvasElement, newData: any) {
         this.canvas = ChartPlugin.setUpCanvas(canvasHTMLRef)
         this.data = newData
+
+        window.addEventListener('resize', () => this.resizeRender())
     }
 
     public runRender(): void {
         this.clearBackground()
-        this.drawRows()
-        this.drawGraphic()
+        this.drawYAxis()
+        this.drawXAxis()
+        this.drawCharts()
     }
 
     private static setUpCanvas(reference: HTMLCanvasElement): CanvasData {
-        const cssWidth: number = reference.offsetWidth
-        const cssHeight: number = reference.offsetHeight
-        const width: number = cssWidth * defaultParameters.pixelRatio
-        const height: number = cssHeight * defaultParameters.pixelRatio
+        const [cssWidth, cssHeight, width, height] = ChartPlugin.getCanvasSizes(reference)
 
         reference.width = width
         reference.height = height
@@ -34,8 +35,36 @@ export class ChartPlugin {
             CSSHeight: cssHeight,
             fullWidth: width,
             fullHeight: height,
-            viewHeight: height - defaultParameters.padding * 2
+            viewHeight: height - defaultParameters.padding * 2,
+            viewWidth: width
         }
+    }
+
+    private static getCanvasSizes(reference: HTMLCanvasElement): [number, number, number, number] {
+        return [
+            reference.offsetWidth,
+            reference.offsetHeight,
+            reference.offsetWidth * defaultParameters.pixelRatio,
+            reference.offsetHeight * defaultParameters.pixelRatio
+        ]
+    }
+
+    private resizeRender(): void {
+        this.recountCanvasDimensions()
+        this.runRender()
+    }
+
+    private recountCanvasDimensions(): void {
+        const [cssWidth, cssHeight, width, height] = ChartPlugin.getCanvasSizes(this.canvas.reference)
+        this.canvas.reference.width = width
+        this.canvas.reference.height = height
+
+        this.canvas.CSSWidth = cssWidth
+        this.canvas.CSSHeight = cssHeight
+        this.canvas.fullWidth = width
+        this.canvas.fullHeight = height
+        this.canvas.viewHeight = height - defaultParameters.padding * 2
+        this.canvas.viewWidth = width
     }
 
     private clearBackground(): void {
@@ -43,7 +72,7 @@ export class ChartPlugin {
         this.canvas.context.fillRect(0, 0, this.canvas.fullWidth, this.canvas.fullHeight)
     }
 
-    private drawRows(): void {
+    private drawYAxis(): void {
         this.canvas.context.strokeStyle = defaultParameters.theme.colors.gridRowLine
         this.canvas.context.lineWidth = defaultParameters.theme.sizes.gridRowLine
         this.canvas.context.fillStyle = defaultParameters.theme.font.color
@@ -59,28 +88,46 @@ export class ChartPlugin {
             const y: number = step * counter
             this.canvas.context.moveTo(0, y + defaultParameters.padding)
             this.canvas.context.lineTo(this.canvas.fullWidth, y + defaultParameters.padding)
-            this.canvas.context.fillText(Math.floor(yMax - counter * textStep).toString(), 5,
+            this.canvas.context.fillText(Math.round(yMax - counter * textStep).toString(), 5,
                 y + defaultParameters.padding - 10)
         }
         this.canvas.context.stroke()
         this.canvas.context.closePath()
     }
 
-    private drawGraphic(): void {
+    private drawXAxis(): void {
+
+    }
+
+    private drawCharts(): void {
         const [yMin, yMax]: [number, number] = this.computeBoundaries()
         const yRatio: number = this.canvas.viewHeight / (yMax - yMin)
+        const xRatio: number = this.canvas.viewWidth / (this.data.x.length - 2)
+
+        this.data.lines.forEach(value => this.drawOneChart(value.values, xRatio, yRatio, value.color))
+    }
+
+    private drawOneChart(values: Array<number>, xRatio: number, yRatio: number, color: string): void {
+
         this.canvas.context.beginPath()
         this.canvas.context.lineWidth = defaultParameters.theme.sizes.chartLine
-        this.canvas.context.strokeStyle = defaultParameters.theme.colors.chartLine
-        for (const [x, y] of this.data) {
-            this.canvas.context.lineTo(x, this.canvas.fullHeight - defaultParameters.padding - y * yRatio)
-        }
+        this.canvas.context.strokeStyle = color.trim() !== '' ? color.trim() : defaultParameters.theme.colors.chartLine
+
+        values.forEach((y: number, index: number) =>
+            this.canvas.context.lineTo(index * xRatio, this.canvas.fullHeight - defaultParameters.padding - y * yRatio)
+        )
         this.canvas.context.stroke()
         this.canvas.context.closePath()
     }
 
     private computeBoundaries(): [number, number] {
-        const onlyValues: Array<number> = this.data.map(([x, y]) => y)
-        return [Math.min(...onlyValues), Math.max(...onlyValues)]
+        let minimum: number = this.data.lines[0].values[0] || 0,
+            maximum: number = this.data.lines[0].values[0] || 0
+
+        this.data.lines.forEach(line => {
+            minimum = Math.min(minimum, Math.min(...line.values))
+            maximum = Math.max(maximum, Math.max(...line.values))
+        })
+        return [minimum, maximum]
     }
 }

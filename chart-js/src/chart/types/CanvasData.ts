@@ -7,4 +7,5 @@ export interface CanvasData {
     fullWidth: number
     fullHeight: number
     viewHeight: number
+    viewWidth: number
 }

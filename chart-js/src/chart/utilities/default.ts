@@ -6,8 +6,8 @@ const DEFAULT_PIXEL_RATIO: number = 3
 
 const defaultTheme: Theme = {
     sizes: {
-        chartLine: DEFAULT_PIXEL_RATIO * 4,
-        gridRowLine: 0.25 * DEFAULT_PIXEL_RATIO
+        chartLine: DEFAULT_PIXEL_RATIO * 3,
+        gridRowLine: .5 * DEFAULT_PIXEL_RATIO
     },
     colors: {
         chartLine: '#2ed573',

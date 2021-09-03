@@ -358,8 +358,8 @@ export const getChartData = () => {
                 y1: '#1',
             },
             colors: {
-                y0: '#3DC23F',
-                y1: '#F34C44',
+                y0: '#27ae60',
+                y1: '#c0392b',
             },
         },
     ][0]
