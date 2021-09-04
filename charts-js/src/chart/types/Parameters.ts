@@ -3,6 +3,7 @@ import {Theme} from './Theme'
 export interface Parameters {
     padding: number
     pixelRatio: number
-    theme: Theme,
-    rowsCount: number
+    theme: Theme
+    rowsCount: number // for Y
+    colsCount: number // for X
 }

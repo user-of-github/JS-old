@@ -14,11 +14,45 @@ export class ChartPlugin {
         window.addEventListener('resize', () => this.resizeRender())
     }
 
+    private mousemove(event: MouseEvent, proxy: any): void {
+        const clientX = event.clientX
+        proxy.mouse = {x: clientX}
+    }
+
     public runRender(): void {
         this.clearBackground()
+
+        const proxy: {} = new Proxy({}, {
+            set(...args) {
+                const result: boolean = Reflect.set(...args)
+                window.requestAnimationFrame(render)
+                return result
+            }
+        })
+        this.canvas.reference.addEventListener('mousemove', (event: MouseEvent) => this.mousemove(event, proxy))
+
+
+        const [yMin, yMax]: [number, number] = this.computeBoundaries()
+        const yRatio: number = this.canvas.viewHeight / (yMax - yMin)
+        const xRatio: number = this.canvas.viewWidth / (this.data.x.length - 2)
+        const render = (): void => {
+            this.clearBackground()
+            this.drawYAxis()
+            this.drawXAxis(xRatio)
+            this.drawCharts(xRatio, yRatio)
+        }
+
+        render()
+    }
+
+    // public destroy(): void {
+    //     this.canvas.reference.removeEventListener('mousemove', this.mousemove)
+    // }
+
+    private render(xRatio: number, yRatio: number): void {
         this.drawYAxis()
-        this.drawXAxis()
-        this.drawCharts()
+        this.drawXAxis(xRatio)
+        this.drawCharts(xRatio, yRatio)
     }
 
     private static setUpCanvas(reference: HTMLCanvasElement): CanvasData {
@@ -95,15 +129,18 @@ export class ChartPlugin {
         this.canvas.context.closePath()
     }
 
-    private drawXAxis(): void {
-
+    private drawXAxis(xRatio: number): void {
+        const step: number = Math.round(this.data.x.length / defaultParameters.colsCount)
+        this.canvas.context.beginPath()
+        for (let counter: number = 0; counter < this.data.x.length; counter += step) {
+            this.canvas.context.fillText(new Date(this.data.x[counter]).toLocaleDateString(),
+                counter * xRatio,
+                this.canvas.fullHeight - 10
+            )
+        }
     }
 
-    private drawCharts(): void {
-        const [yMin, yMax]: [number, number] = this.computeBoundaries()
-        const yRatio: number = this.canvas.viewHeight / (yMax - yMin)
-        const xRatio: number = this.canvas.viewWidth / (this.data.x.length - 2)
-
+    private drawCharts(xRatio: number, yRatio: number): void {
         this.data.lines.forEach(value => this.drawOneChart(value.values, xRatio, yRatio, value.color))
     }
 

@@ -2,11 +2,11 @@ import {Parameters} from '../types/Parameters'
 import {Theme} from '../types/Theme'
 
 
-const DEFAULT_PIXEL_RATIO: number = 3
+const DEFAULT_PIXEL_RATIO: number = 2.5
 
 const defaultTheme: Theme = {
     sizes: {
-        chartLine: DEFAULT_PIXEL_RATIO * 3,
+        chartLine: DEFAULT_PIXEL_RATIO * 2,
         gridRowLine: .5 * DEFAULT_PIXEL_RATIO
     },
     colors: {
@@ -26,5 +26,6 @@ export const defaultParameters: Parameters = {
     padding: 50 * DEFAULT_PIXEL_RATIO,
     pixelRatio: DEFAULT_PIXEL_RATIO,
     theme: defaultTheme,
-    rowsCount: 5
+    rowsCount: 5,
+    colsCount: 6
 }

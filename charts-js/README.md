@@ -7,8 +7,10 @@
 
 #### Stack:
 * _TypeScript_
+* _HTML5 Canvas API_
 #### Features:
-* _Separation on TypeScript classes & interfaces_
+* _Working reused plugin placed in a separate class with additions_
+* _Separation on TypeScript interfaces_
 * _Built with PARCEL_
 * _Deployed on SURGE_
 * _Other.._
