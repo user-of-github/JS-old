@@ -2,17 +2,14 @@ import {Parameters} from '../types/Parameters'
 import {Theme} from '../types/Theme'
 
 
-const DEFAULT_PIXEL_RATIO: number = 2.5
+const DEFAULT_PIXEL_RATIO: number = 2
 
 const defaultTheme: Theme = {
-    sizes: {
-        chartLine: DEFAULT_PIXEL_RATIO * 2,
-        gridRowLine: .5 * DEFAULT_PIXEL_RATIO
-    },
     colors: {
         chartLine: '#2ed573',
         gridRowLine: 'rgba(47, 53, 66,0.25)',
-        background: '#F8F9FD'
+        background: '#F8F9FD',
+        toolLine: '#34495e'
     },
     font: {
         family: 'Play, sans-serif',
@@ -23,9 +20,14 @@ const defaultTheme: Theme = {
 }
 
 export const defaultParameters: Parameters = {
-    padding: 50 * DEFAULT_PIXEL_RATIO,
     pixelRatio: DEFAULT_PIXEL_RATIO,
     theme: defaultTheme,
     rowsCount: 5,
-    colsCount: 6
+    colsCount: 6,
+    sizes: {
+        padding: 50 * DEFAULT_PIXEL_RATIO,
+        chartLine: 2 * DEFAULT_PIXEL_RATIO,
+        gridRowLine: 0.25 * DEFAULT_PIXEL_RATIO,
+        circleOnOver: 4 * DEFAULT_PIXEL_RATIO
+    }
 }

@@ -9,15 +9,10 @@ interface Palette {
     chartLine: string
     background: string
     gridRowLine: string
-}
-
-interface Dimension {
-    chartLine: number
-    gridRowLine: number
+    toolLine: string
 }
 
 export interface Theme {
-    sizes: Dimension
     colors: Palette
     font: Font
 }

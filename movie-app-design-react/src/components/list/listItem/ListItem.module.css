@@ -1,0 +1,12 @@
+.listItem {
+    width: 225px;
+    height: 120px;
+    background-color: var(--main-color);
+    margin-right: 10px;
+}
+
+.listItem img {
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+}
