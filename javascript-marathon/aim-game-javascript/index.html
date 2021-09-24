@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Shooting Game — JS Marathon. Day 5</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="logo.svg" type="image/x-icon">
+</head>
+<body>
+<div class="app">
+    <div class="screen">
+        <h1>Shooting Training</h1>
+        <button class="btn" id="start">Play now !</button>
+    </div>
+
+    <div class="screen">
+        <h2>Choose time</h2>
+        <ul class="time-list" id="time-list">
+            <li><button class="btn time-btn" data-time="5">5 sec</button></li>
+            <li><button class="btn time-btn" data-time="10">10 sec</button></li>
+            <li><button class="btn time-btn" data-time="15">15 sec</button></li>
+            <li><button class="btn time-btn" data-time="20">20 sec</button></li>
+            <li><button class="btn time-btn" data-time="25">25 sec</button></li>
+            <li><button class="btn time-btn" data-time="30">30 sec</button></li>
+        </ul>
+    </div>
+
+    <div class="screen">
+        <h3><span id="time">00:00</span> left</h3>
+        <div class="board" id="board"></div>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
