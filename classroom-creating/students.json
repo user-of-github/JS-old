@@ -1,0 +1,66 @@
+[
+  {
+    "classroom": 1,
+    "seatPlace": {
+      "desk": 3,
+      "pos": 2
+    },
+    "name": "Katya"
+  },
+  {
+    "classroom": 1,
+    "seatPlace": {
+      "desk": 4,
+      "pos": 2
+    },
+    "name": "Olya"
+  },
+  {
+    "classroom": 212,
+    "seatPlace": {
+      "desk": 1,
+      "pos": 1
+    },
+    "name": "Yars"
+  },
+  {
+    "classroom": 212,
+    "seatPlace": {
+      "desk": 2,
+      "pos": 1
+    },
+    "name": "Daniel"
+  },
+  {
+    "classroom": 212,
+    "seatPlace": {
+      "desk": 2,
+      "pos": 2
+    },
+    "name": "Kirill"
+  },
+  {
+    "classroom": 1,
+    "seatPlace": {
+      "desk": 1,
+      "pos": 1
+    },
+    "name": "Petya"
+  },
+  {
+    "classroom": 1,
+    "seatPlace": {
+      "desk": 2,
+      "pos": 1
+    },
+    "name": "Sasha"
+  },
+  {
+    "classroom": 1,
+    "seatPlace": {
+      "desk": 2,
+      "pos": 2
+    },
+    "name": "Nikita"
+  }
+]
