@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+     "lib": ["ES2023"],
+    "module": "commonjs",
+    "esModuleInterop": true,
+
+    "forceConsistentCasingInFileNames": true,
+
+    // strict checks
+    "strict": true,
+    "alwaysStrict": true,
+    "skipLibCheck": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "strictFunctionTypes": true,
+    "noImplicitThis": true,
+
+  }
+}
