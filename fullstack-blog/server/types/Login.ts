@@ -1,15 +1,10 @@
 import { User } from './User';
+import { SuccessfulResponse, UnsuccessfulResponse } from './SuccessResponse';
 
 export interface LoginRequest {
     email: string;
     password: string;
 }
 
-export type LoginResponse = {
-    success: true;
-    token: string;
-    user: Partial<User>
-} | {
-    success: false;
-    error: string;
-}
+type SuccessfulLoginResponse = SuccessfulResponse & { user: Partial<User>, token: string }
+export type LoginResponse = SuccessfulLoginResponse | UnsuccessfulResponse

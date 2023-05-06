@@ -1,5 +1,5 @@
 import { User } from './User';
-import { success } from 'concurrently/dist/src/defaults';
+import { SuccessfulResponse, UnsuccessfulResponse } from './SuccessResponse';
 
 export interface RegisterRequest {
     email: string;
@@ -8,12 +8,5 @@ export interface RegisterRequest {
     password: string;
 }
 
-
-export type RegisterResponse = {
-    success: false;
-    errors: string[];
-} | {
-    success: true;
-    user: Partial<User>;
-    token: string;
-}
+type SuccessfulRegister = SuccessfulResponse & { user: Partial<User>, token: string }
+export type RegisterResponse = UnsuccessfulResponse | SuccessfulRegister

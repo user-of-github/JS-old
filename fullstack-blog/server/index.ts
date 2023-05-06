@@ -10,7 +10,7 @@ import { RegisterRequest, RegisterResponse } from './types/Register';
 import UserModel from './models/User';
 import { User, UserDocumentResult } from './types/User';
 import { LoginRequest, LoginResponse } from './types/Login';
-
+import isAuthorized from './utils/isAuthorized';
 
 dotenv.config();
 
@@ -36,7 +36,7 @@ app.post('/auth/register', registerValidator, async (request: Request<{}, {}, Re
         if (!errors.isEmpty()) {
             return response.status(400).json({
                 success: false,
-                errors: errors.array().map(err => err.msg)
+                error: errors.array().map(err => err.msg)
             });
         }
 
@@ -99,10 +99,25 @@ app.post('/auth/login', async (request: Request<{}, {}, LoginRequest>, response:
             token: token
         });
     } catch (error) {
-
+        console.info(error);
+        response.status(500).json({
+            success: false,
+            error: 'Unable to login'
+        });
     }
 });
 
+app.get('/auth/me', isAuthorized, async (request: Request, response: Response) => {
+    try {
+
+    } catch (error) {
+        console.info(error);
+        response.status(500).json({
+            success: false,
+            error: 'Unable to login'
+        });
+    }
+});
 
 
 
