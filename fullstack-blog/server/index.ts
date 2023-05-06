@@ -2,7 +2,7 @@ import express, { Express } from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import { PORT } from './constants/constants';
-import { registerValidator } from './validations/auth';
+import * as Validator from './validators';
 import isAuthorized from './utils/isAuthorized';
 import * as UserController from './controllers/UserController';
 
@@ -21,11 +21,11 @@ const app: Express = express();
 app.use(express.json());
 
 
-app.post('/auth/register', registerValidator, UserController.register);
-app.post('/auth/login', UserController.logIn);
+app.post('/auth/register', Validator.registerValidator, UserController.register);
+app.post('/auth/login', Validator.loginValidator, UserController.logIn);
 app.get('/auth/me', isAuthorized, UserController.getMe);
 
 
-app.listen(PORT, () => {
+app.listen(PORT, (): void => {
     console.info('Server listening on port ', PORT);
 });
