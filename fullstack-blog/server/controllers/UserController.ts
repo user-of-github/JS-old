@@ -6,7 +6,7 @@ import { RegisterRequest, RegisterResponse } from '../types/Register';
 import { validationResult } from 'express-validator';
 
 import UserModel from '../models/User';
-import { UserDocumentResult } from '../types/User';
+import { UserDocument } from '../types/User';
 import { LoginRequest, LoginResponse } from '../types/Login';
 import { AboutMeResponse } from '../types/Me';
 
@@ -34,7 +34,7 @@ export const register = async (request: Request<{}, {}, RegisterRequest>, respon
             avatarUrl: request.body.avatarUrl
         });
 
-        const createdUser: UserDocumentResult = await doc.save() as unknown as UserDocumentResult;
+        const createdUser: UserDocument = await doc.save() as unknown as UserDocument;
 
         const token: string = jwt.sign({_id: createdUser._id}, jwtEncryptKey, {expiresIn: jwtTokenDuration});
 
@@ -57,7 +57,7 @@ export const register = async (request: Request<{}, {}, RegisterRequest>, respon
 
 export const logIn = async (request: Request<{}, {}, LoginRequest>, response: Response<LoginResponse>) => {
     try {
-        const user = await UserModel.findOne({email: request.body.email}) as UserDocumentResult;
+        const user = await UserModel.findOne({email: request.body.email}) as UserDocument;
 
         if (!user) {
             return response.status(404).json({
@@ -94,7 +94,7 @@ export const logIn = async (request: Request<{}, {}, LoginRequest>, response: Re
 
 export const getMe = async (request: Request, response: Response<AboutMeResponse>) => {
     try {
-        const user = await UserModel.findById((request as Request & { userId: string }).userId) as UserDocumentResult;
+        const user = await UserModel.findById((request as Request & { userId: string }).userId) as UserDocument;
         const {passwordHash, ...restUserData} = user['_doc'];
 
         response.json({

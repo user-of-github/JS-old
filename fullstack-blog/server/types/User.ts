@@ -8,7 +8,7 @@ export interface User {
     updatedAt: unknown;
 }
 
-export interface UserDocumentResult {
+export interface UserDocument {
     _doc: User;
     _id: unknown;
 }
