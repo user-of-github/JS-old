@@ -5,6 +5,8 @@
     "module": "commonjs",
     "esModuleInterop": true,
 
+    "outDir": "build",
+
     "forceConsistentCasingInFileNames": true,
 
     // strict checks
