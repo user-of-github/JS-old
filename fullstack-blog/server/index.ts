@@ -5,6 +5,7 @@ import { PORT } from './constants/constants';
 import * as Validator from './validators';
 import isAuthorized from './utils/isAuthorized';
 import * as UserController from './controllers/UserController';
+import * as PostController from './controllers/PostController';
 
 
 dotenv.config();
@@ -13,7 +14,7 @@ const databaseConnectionUrl: string = process.env.DB_CONNECT as string;
 
 mongoose.connect(databaseConnectionUrl)
     .then((): void => console.info('DB connection successful'))
-    .catch(error => console.info('DB connection error', error));
+    .catch(error => console.error('DB connection error', error));
 
 const app: Express = express();
 
@@ -24,6 +25,12 @@ app.use(express.json());
 app.post('/auth/register', Validator.registerValidator, UserController.register);
 app.post('/auth/login', Validator.loginValidator, UserController.logIn);
 app.get('/auth/me', isAuthorized, UserController.getMe);
+
+app.post('/posts', isAuthorized, Validator.postCreateValidator, PostController.createPost);
+app.get('/posts', PostController.getAllPosts);
+app.get('/posts/:id', PostController.getPost);
+app.delete('/posts/:id', isAuthorized, PostController.removePost);
+app.patch('/posts/:id', isAuthorized, PostController.updatePost);
 
 
 app.listen(PORT, (): void => {

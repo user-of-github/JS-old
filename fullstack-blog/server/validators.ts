@@ -16,6 +16,6 @@ export const loginValidator = [
 export const postCreateValidator = [
     body('title', 'Title is absent or shorter than 5 symbols').isString().isLength({min: 5}),
     body('text', 'Text is absent or shorted than 10 symbols').isString().isLength({min: 10}),
-    body('tags', 'Tags must be a string, which can be converted to an array').optional().isString(),
+    body('tags', 'Tags must be an array').optional().isArray(),
     body('imageUrl', 'Invalid image url').optional().isString()
 ];

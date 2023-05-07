@@ -8,5 +8,5 @@ export interface RegisterRequest {
     password: string;
 }
 
-type SuccessfulRegister = SuccessfulResponse & { user: Partial<User>, token: string }
-export type RegisterResponse = UnsuccessfulResponse | SuccessfulRegister
+type SuccessfulRegister = SuccessfulResponse & { user: Partial<User>, token: string };
+export type RegisterResponse = UnsuccessfulResponse | SuccessfulRegister;
