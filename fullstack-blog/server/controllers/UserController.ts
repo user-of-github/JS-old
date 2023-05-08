@@ -3,7 +3,6 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 import { RegisterRequest, RegisterResponse } from '../types/Register';
-import { validationResult } from 'express-validator';
 
 import UserModel from '../models/User';
 import { UserDocument } from '../types/User';
@@ -16,14 +15,6 @@ const jwtTokenDuration: string = process.env.JWT_TOKEN_DURATION as string;
 
 export const register = async (request: Request<{}, {}, RegisterRequest>, response: Response<RegisterResponse>) => {
     try {
-        const errors = validationResult(request);
-        if (!errors.isEmpty()) {
-            return response.status(400).json({
-                success: false,
-                error: errors.array().map(err => err.msg)
-            });
-        }
-
         const salt: string = await bcrypt.genSalt(10);
         const hashedPassword: string = await bcrypt.hash(request.body.password, salt);
 

@@ -19,3 +19,10 @@ export const postCreateValidator = [
     body('tags', 'Tags must be an array').optional().isArray(),
     body('imageUrl', 'Invalid image url').optional().isString()
 ];
+
+export const postUpdateValidator = [
+    body('title', 'Title is absent or shorter than 5 symbols').optional().isString().isLength({min: 5}),
+    body('text', 'Text is absent or shorted than 10 symbols').optional().isString().isLength({min: 10}),
+    body('tags', 'Tags must be an array').optional().isArray(),
+    body('imageUrl', 'Invalid image url').optional().isString()
+];

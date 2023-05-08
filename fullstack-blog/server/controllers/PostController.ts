@@ -6,14 +6,6 @@ import { User, UserDocument } from '../types/User';
 
 export const createPost = async (request: Request<{}, {}, Post>, response: Response<PostResponse>) => {
     try {
-        const errors = validationResult(request);
-        if (!errors.isEmpty()) {
-            return response.status(400).json({
-                success: false,
-                error: errors.array().map(err => err.msg)
-            });
-        }
-
         const doc = new PostModel({
             title: request.body.title,
             text: request.body.text,
