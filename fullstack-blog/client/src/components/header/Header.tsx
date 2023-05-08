@@ -2,6 +2,7 @@ import styles from './Header.module.scss';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 
+
 export const Header = (): JSX.Element => {
     const isAuthenticated: boolean = false;
     const onLogOutClick = (): void => {
@@ -16,7 +17,7 @@ export const Header = (): JSX.Element => {
                         FULL-STACK MERN BLOG
                     </a>
 
-                    <div className={styles.buttons}>
+                    <nav className={styles.buttons}>
                         {isAuthenticated ? (
                             <>
                                 <a href="/posts/create">
@@ -36,7 +37,7 @@ export const Header = (): JSX.Element => {
                                 </a>
                             </>
                         )}
-                    </div>
+                    </nav>
                 </div>
             </Container>
         </header>
