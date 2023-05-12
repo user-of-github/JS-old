@@ -8,7 +8,22 @@ import { TagsBlock } from '../../components/tagsBlock/TagsBlock';
 import { CommentsBlock } from '../../components/commentsBlock/CommentsBlock';
 import { observer } from 'mobx-react-lite';
 import { usePostsStore } from '../../core/store/postsStore/PostsStoreContext';
+import { LoadingStatus } from '../../core/types/LoadingStatus';
+import { Post } from '../../core/types/Post';
 
+
+const LoadingSkeletonsTemplate = React.memo((): JSX.Element => {
+    return (
+        <>
+            {[...Array(2)].map((_, index) => (
+                <PostViewer
+                    key={index}
+                    isLoading={true}
+                />
+            ))}
+        </>
+    );
+}, () => true);
 
 export const HomePage = observer(() => {
     const store = usePostsStore();
@@ -19,50 +34,38 @@ export const HomePage = observer(() => {
 
     return (
         <>
-            <Tabs style={{ marginBottom: 15 }} value={0} aria-label="basic tabs example">
-                <Tab label="Новые" />
-                <Tab label="Популярные" />
+            <Tabs style={{marginBottom: 15}} value={0} aria-label="basic tabs example">
+                <Tab label="Новые"/>
+                <Tab label="Популярные"/>
             </Tabs>
             <Grid container spacing={4} item>
                 <Grid xs={8} item>
-                    {[...Array(5)].map((_, index) => (
-                        <PostViewer
-                            post={{
-                                _id: '1',
-                                title: "Roast the code #1 | Rock Paper Scissors",
-                                imageUrl: "https://res.cloudinary.com/practicaldev/image/fetch/s--UnAfrEG8--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/icohm5g0axh9wjmu4oc3.png",
-                                author: {
-                                    avatarUrl: 'https://res.cloudinary.com/practicaldev/image/fetch/s--uigxYVRB--/c_fill,f_auto,fl_progressive,h_50,q_auto,w_50/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/187971/a5359a24-b652-46be-8898-2c5df32aa6e0.png',
-                                    name: 'Keff'
-                                },
-                                createdAt: '12 июня 2022 г.',
-                                viewsCount: 150,
-                                commentsCount: 3,
-                                tags: ['react', 'fun', 'typescript']
-                            }}
-                            key={index}
-                            isLoading={false}
-                        />
-                    ))}
+                    {store.postsLoadingStatus === LoadingStatus.LOADING && <LoadingSkeletonsTemplate/>}
+                    {
+                        store.postsLoadingStatus === LoadingStatus.LOADED &&
+                        <>
+                            {store.posts.map(post => <PostViewer isLoading={false} post={post} key={post._id}/>)}
+                        </>
+                    }
                 </Grid>
                 <Grid xs={4} item>
-                    <TagsBlock tags={['react', 'typescript', 'заметки']} isLoading={false} />
+                    <TagsBlock tags={['react', 'typescript', 'заметки']} isLoading={false}/>
                     <CommentsBlock
                         comments={[
                             {
                                 user: {
                                     name: 'Вася Пупкин',
-                                    avatarUrl: 'https://mui.com/static/images/avatar/1.jpg',
+                                    avatarUrl: 'https://mui.com/static/images/avatar/1.jpg'
                                 },
-                                text: 'Это тестовый комментарий',
+                                text: 'Это тестовый комментарий'
                             },
                             {
                                 user: {
                                     name: 'Иван Иванов',
-                                    avatarUrl: 'https://mui.com/static/images/avatar/2.jpg',
+                                    avatarUrl: 'https://mui.com/static/images/avatar/2.jpg'
                                 },
-                                text: 'When displaying three lines or more, the avatar is not aligned at the top. You should set the prop to align the avatar at the top',
-                            },
+                                text: 'When displaying three lines or more, the avatar is not aligned at the top. You should set the prop to align the avatar at the top'
+                            }
                         ]}
                         isLoading={false}
                     />
@@ -70,4 +73,4 @@ export const HomePage = observer(() => {
             </Grid>
         </>
     );
-})
+});

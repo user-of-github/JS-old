@@ -4,7 +4,7 @@ import axios from './axios';
 
 export namespace API {
     export const fetchPosts = async (): Promise<PostsResponse> => {
-        const response: PostsResponse = await axios.get('/posts');
+        const response: PostsResponse = (await axios.get('/posts')).data;
 
 
         if (!response.success) {

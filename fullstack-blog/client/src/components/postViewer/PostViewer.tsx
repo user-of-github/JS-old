@@ -11,10 +11,8 @@ import { UserInfo } from '../userInfo/UserInfo';
 import styles from './PostViewer.module.scss';
 import { Link } from 'react-router-dom';
 
-interface PostViewerProps {
-    post: Post;
-    isLoading: boolean;
-}
+
+type PostViewerProps = {isLoading: true} | {isLoading?: false, post: Post};
 
 export const PostViewer = (props: PostViewerProps) => {
     if (props.isLoading) {
