@@ -4,7 +4,7 @@ import Skeleton from '@mui/material/Skeleton';
 import Avatar from '@mui/material/Avatar';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
-import { Comment } from '../../types/Comment';
+import { Comment } from '../../core/types/Comment';
 
 
 interface CommentProps {

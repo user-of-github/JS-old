@@ -1,4 +1,4 @@
-import { User } from '../../types/User';
+import { User } from '../../core/types/User';
 import styles from './UserInfo.module.scss';
 
 

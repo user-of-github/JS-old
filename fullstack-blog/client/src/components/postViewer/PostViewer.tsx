@@ -6,9 +6,10 @@ import EyeIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import CommentIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 
 import { PostSkeleton } from './Skeleton';
-import { Post } from '../../types/Post';
+import { Post } from '../../core/types/Post';
 import { UserInfo } from '../userInfo/UserInfo';
 import styles from './PostViewer.module.scss';
+import { Link } from 'react-router-dom';
 
 interface PostViewerProps {
     post: Post;
@@ -24,14 +25,14 @@ export const PostViewer = (props: PostViewerProps) => {
     };
 
     return (
-        <div className={clsx(styles.root, {[styles.rootFull]: props.post.isFullPost})}>
+        <article className={clsx(styles.root, {[styles.rootFull]: props.post.isFullPost})}>
             {props.post.isEditable && (
                 <div className={styles.editButtons}>
-                    <a href={`/posts/${props.post._id}/edit`}>
+                    <Link to={`/posts/${props.post._id}/edit`}>
                         <IconButton color="primary">
                             <EditIcon/>
                         </IconButton>
-                    </a>
+                    </Link>
                     <IconButton onClick={onClickRemove} color="secondary">
                         <DeleteIcon/>
                     </IconButton>
@@ -48,12 +49,12 @@ export const PostViewer = (props: PostViewerProps) => {
                 <UserInfo user={props.post.author} additionalText={props.post.createdAt}/>
                 <div className={styles.indention}>
                     <h2 className={clsx(styles.title, {[styles.titleFull]: props.post.isFullPost})}>
-                        {props.post.isFullPost ? props.post.title : <a href={`/posts/${props.post._id}`}>{props.post.title}</a>}
+                        {props.post.isFullPost ? props.post.title : <Link to={`/posts/${props.post._id}`}>{props.post.title}</Link>}
                     </h2>
                     <ul className={styles.tags}>
                         {(props.post.tags || []).map((name) => (
                             <li key={name}>
-                                <a href={`/tag/${name}`}>#{name}</a>
+                                <Link to={`/tag/${name}`}>#{name}</Link>
                             </li>
                         ))}
                     </ul>
@@ -70,6 +71,6 @@ export const PostViewer = (props: PostViewerProps) => {
                     </ul>
                 </div>
             </div>
-        </div>
+        </article>
     );
 };

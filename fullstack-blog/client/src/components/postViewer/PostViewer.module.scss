@@ -5,12 +5,15 @@ $blue: #4361ee;
   border: 1px solid #dedede;
   border-radius: 6px;
   overflow: hidden;
-  margin-bottom: 15px;
   position: relative;
+  transition: 0.2s all;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .05);
+
+  margin-top: 30px;
 
   &:hover {
-    border: 1px solid $blue;
-    box-shadow: 0 0 0 1px $blue;
+    //border: 1px solid $blue;
+
 
     .editButtons {
       opacity: 1;

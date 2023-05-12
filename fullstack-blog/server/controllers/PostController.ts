@@ -31,6 +31,7 @@ export const createPost = async (request: Request<{}, {}, Post>, response: Respo
 
 
 export const getAllPosts = async (request: Request, response: Response<PostsResponse>) => {
+    // response.header('Access-Control-Allow-Origin', '*');
     try {
         const posts: Post[] = await PostModel.find().populate('author').exec();
 

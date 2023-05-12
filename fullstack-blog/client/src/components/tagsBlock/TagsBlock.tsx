@@ -5,7 +5,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import TagIcon from '@mui/icons-material/Tag';
 import ListItemText from '@mui/material/ListItemText';
 import Skeleton from '@mui/material/Skeleton';
-
+import { Link } from 'react-router-dom';
 import { SideBlock } from '../sideBlock/SideBlock';
 
 
@@ -19,11 +19,11 @@ export const TagsBlock = ({tags, isLoading = true}: TagsBlockProps): JSX.Element
         <SideBlock title="Tags">
             <List>
                 {(isLoading ? [...Array(5)] : tags).map((tag: string, index: number) => (
-                    <a
-                        style={{textDecoration: 'none', color: 'black'}}
-                        href={`/tags/${name}`}
+                    <Link key={index}
+                          style={{textDecoration: 'none', color: 'black'}}
+                          to={`/tags/${name}`}
                     >
-                        <ListItem key={index} disablePadding>
+                        <ListItem disablePadding>
                             <ListItemButton>
                                 <ListItemIcon>
                                     <TagIcon/>
@@ -35,7 +35,7 @@ export const TagsBlock = ({tags, isLoading = true}: TagsBlockProps): JSX.Element
                                 )}
                             </ListItemButton>
                         </ListItem>
-                    </a>
+                    </Link>
                 ))}
             </List>
         </SideBlock>

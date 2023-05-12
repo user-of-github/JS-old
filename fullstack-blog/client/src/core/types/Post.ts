@@ -9,7 +9,7 @@ export interface Post {
     viewsCount: number;
     commentsCount: number;
     tags?: string[];
-    children: any;
-    isFullPost: boolean;
-    isEditable: boolean;
+    children?: any;
+    isFullPost?: boolean;
+    isEditable?: boolean;
 }

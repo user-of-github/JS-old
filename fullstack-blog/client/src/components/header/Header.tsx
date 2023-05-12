@@ -1,7 +1,7 @@
-import styles from './Header.module.scss';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
-
+import {Link} from 'react-router-dom';
+import styles from './Header.module.scss';
 
 export const Header = (): JSX.Element => {
     const isAuthenticated: boolean = false;
@@ -13,28 +13,28 @@ export const Header = (): JSX.Element => {
         <header className={styles.header}>
             <Container maxWidth="lg">
                 <div className={styles.content}>
-                    <a className={styles.logo} href="/">
+                    <Link className={styles.logo} to="/">
                         FULL-STACK MERN BLOG
-                    </a>
+                    </Link>
 
                     <nav className={styles.buttons}>
                         {isAuthenticated ? (
                             <>
-                                <a href="/posts/create">
+                                <Link to="/posts/create-post">
                                     <Button variant="contained">Create a post</Button>
-                                </a>
+                                </Link>
                                 <Button onClick={onLogOutClick} variant="contained" color="error">
                                     Log out
                                 </Button>
                             </>
                         ) : (
                             <>
-                                <a href="/login">
+                                <Link to="/auth/login">
                                     <Button variant="outlined">Log In</Button>
-                                </a>
-                                <a href="/register">
+                                </Link>
+                                <Link to="/auth/register">
                                     <Button variant="contained">Create an account</Button>
-                                </a>
+                                </Link>
                             </>
                         )}
                     </nav>

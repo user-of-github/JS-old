@@ -1,11 +1,11 @@
 import List from '@mui/material/List';
 import { SideBlock } from '../sideBlock/SideBlock';
-import { Comment } from '../../types/Comment';
+import { Comment } from '../../core/types/Comment';
 import { SingleComment } from './Comment';
 
 
 interface CommentsBlockProps {
-    children: JSX.Element | JSX.Element[];
+    children?: JSX.Element | JSX.Element[];
     comments: Comment[];
     isLoading?: boolean;
 }
