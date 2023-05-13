@@ -1,5 +1,6 @@
-import { PostResponse, PostsResponse, TagsResponse } from './types/serverResponses';
+import { LoginResponse, PostResponse, PostsResponse, TagsResponse } from './types/serverResponses';
 import { requestToServer } from './utils/requestToServer';
+import { LoginRequest } from './types/ServerRequest';
 
 
 export namespace API {
@@ -25,6 +26,20 @@ export namespace API {
 
     export const fetchPostById = async (id: string): Promise<PostResponse> => {
         const response = await requestToServer<PostResponse>({path: `/posts/${id}`, method: 'get'});
+
+        if (response === null) {
+            return {success: false, error: 'Unable to find post'};
+        }
+
+        return response;
+    };
+
+    export const login = async (data: LoginRequest): Promise<LoginResponse> => {
+        const response = await requestToServer<LoginResponse>({
+            path: `/auth/login`,
+            method: 'post',
+            body: data
+        });
 
         if (response === null) {
             return {success: false, error: 'Unable to find post'};

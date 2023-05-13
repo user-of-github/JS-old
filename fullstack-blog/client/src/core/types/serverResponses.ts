@@ -1,4 +1,5 @@
 import { Post } from './Post';
+import { User } from './User';
 
 interface SuccessfulResponse {
     success: true;
@@ -9,6 +10,8 @@ interface UnsuccessfulResponse {
     error: string | string[];
 }
 
+type SuccessfulLoginResponse = SuccessfulResponse & { user: User, token: string }
+export type LoginResponse = SuccessfulLoginResponse | UnsuccessfulResponse
 
 
 type SuccessfulPostChange = SuccessfulResponse & { post?: Post };

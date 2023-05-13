@@ -3,3 +3,8 @@ export interface ServerRequest {
     body?: object;
     path: string;
 }
+
+export interface LoginRequest {
+    email: string;
+    password: string;
+}
