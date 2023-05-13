@@ -12,7 +12,14 @@ import styles from './PostViewer.module.scss';
 import { Link } from 'react-router-dom';
 
 
-type PostViewerProps = {isLoading: true} | {isLoading?: false, post: Post};
+type PostViewerProps =
+    { isLoading: true } |
+    {
+        isLoading?: false,
+        post: Post,
+        isFullPost: boolean,
+        children?: JSX.Element | JSX.Element[] | string
+    };
 
 export const PostViewer = (props: PostViewerProps) => {
     if (props.isLoading) {
@@ -23,7 +30,7 @@ export const PostViewer = (props: PostViewerProps) => {
     };
 
     return (
-        <article className={clsx(styles.root, {[styles.rootFull]: props.post.isFullPost})}>
+        <article className={clsx(styles.root, {[styles.rootFull]: props.isFullPost})}>
             {props.post.isEditable && (
                 <div className={styles.editButtons}>
                     <Link to={`/posts/${props.post._id}/edit`}>
@@ -38,7 +45,7 @@ export const PostViewer = (props: PostViewerProps) => {
             )}
             {props.post.imageUrl && (
                 <img
-                    className={clsx(styles.image, {[styles.imageFull]: props.post.isFullPost})}
+                    className={clsx(styles.image, {[styles.imageFull]: props.isFullPost})}
                     src={props.post.imageUrl}
                     alt={props.post.title}
                 />
@@ -46,8 +53,8 @@ export const PostViewer = (props: PostViewerProps) => {
             <div className={styles.wrapper}>
                 <UserInfo user={props.post.author} additionalText={props.post.createdAt}/>
                 <div className={styles.indention}>
-                    <h2 className={clsx(styles.title, {[styles.titleFull]: props.post.isFullPost})}>
-                        {props.post.isFullPost ? props.post.title : <Link to={`/posts/${props.post._id}`}>{props.post.title}</Link>}
+                    <h2 className={clsx(styles.title, {[styles.titleFull]: props.isFullPost})}>
+                        {props.isFullPost ? props.post.title : <Link to={`/posts/${props.post._id}`}>{props.post.title}</Link>}
                     </h2>
                     <ul className={styles.tags}>
                         {(props.post.tags || []).map((name) => (
@@ -56,7 +63,7 @@ export const PostViewer = (props: PostViewerProps) => {
                             </li>
                         ))}
                     </ul>
-                    {props.post.children && <div className={styles.content}>{props.post.children}</div>}
+                    {props.children && <div className={styles.content}>{props.children}</div>}
                     <ul className={styles.postDetails}>
                         <li>
                             <EyeIcon/>

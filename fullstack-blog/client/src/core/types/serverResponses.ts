@@ -17,3 +17,5 @@ export type PostResponse = UnsuccessfulResponse | SuccessfulPostChange;
 type SuccessfulPostsChange = SuccessfulResponse & { posts: Post[] };
 export type PostsResponse = UnsuccessfulResponse | SuccessfulPostsChange;
 
+type SuccessfulTagsResponse = SuccessfulResponse & { tags: string[] };
+export type TagsResponse = UnsuccessfulResponse | SuccessfulTagsResponse;

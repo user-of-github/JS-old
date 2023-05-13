@@ -3,13 +3,19 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import multer from 'multer';
 import cors from 'cors';
+import path from 'path';
 import { PORT, UPLOADED_ASSETS_FOLDER } from './constants/constants';
 import * as Validator from './validators';
+
+dotenv.config({
+    path: path.resolve(__dirname, '../', '.env')
+});
+
+
 import { UserController, PostController } from './controllers/index';
 import { isAuthorized, handleValidatorErrors } from './utils/index';
 
 
-dotenv.config();
 
 const databaseConnectionUrl: string = process.env.DB_CONNECT as string;
 
@@ -40,10 +46,13 @@ app.post('/auth/login', Validator.loginValidator, handleValidatorErrors, UserCon
 app.get('/auth/me', isAuthorized, UserController.getMe);
 
 app.get('/posts', PostController.getAllPosts);
+app.get('/posts/tags', PostController.getLastTags);
 app.get('/posts/:id', PostController.getPost);
 app.post('/posts', isAuthorized, Validator.postCreateValidator, handleValidatorErrors, PostController.createPost);
 app.delete('/posts/:id', isAuthorized, PostController.removePost);
 app.patch('/posts/:id', isAuthorized, Validator.postUpdateValidator, handleValidatorErrors, PostController.updatePost);
+
+
 
 
 app.listen(PORT, (): void => {

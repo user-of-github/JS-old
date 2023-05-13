@@ -9,7 +9,6 @@ import { CommentsBlock } from '../../components/commentsBlock/CommentsBlock';
 import { observer } from 'mobx-react-lite';
 import { usePostsStore } from '../../core/store/postsStore/PostsStoreContext';
 import { LoadingStatus } from '../../core/types/LoadingStatus';
-import { Post } from '../../core/types/Post';
 
 
 const LoadingSkeletonsTemplate = React.memo((): JSX.Element => {
@@ -30,6 +29,7 @@ export const HomePage = observer(() => {
 
     React.useEffect((): void => {
         store.updatePosts();
+        store.updateTags();
     }, []);
 
     return (
@@ -44,12 +44,12 @@ export const HomePage = observer(() => {
                     {
                         store.postsLoadingStatus === LoadingStatus.LOADED &&
                         <>
-                            {store.posts.map(post => <PostViewer isLoading={false} post={post} key={post._id}/>)}
+                            {store.posts.map(post => <PostViewer isLoading={false} post={post} isFullPost={false} key={post._id}/>)}
                         </>
                     }
                 </Grid>
                 <Grid xs={4} item>
-                    <TagsBlock tags={['react', 'typescript', 'заметки']} isLoading={false}/>
+                    <TagsBlock tags={(store.tags || [])} isLoading={false}/>
                     <CommentsBlock
                         comments={[
                             {

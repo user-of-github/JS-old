@@ -1,6 +1,6 @@
 import { Request, response, Response } from 'express';
 import PostModel from '../models/Post';
-import { Post, PostDocument, PostResponse, PostsResponse } from '../types/Post';
+import { Post, PostDocument, PostResponse, PostsResponse, TagsResponse } from '../types/Post';
 import { validationResult } from 'express-validator';
 import { User, UserDocument } from '../types/User';
 
@@ -105,27 +105,49 @@ export const removePost = async (request: Request, response: Response<PostRespon
 };
 
 export const updatePost = async (request: Request, response: Response<PostResponse>) => {
-  try {
-      const id: string = request.params.id;
+    try {
+        const id: string = request.params.id;
 
-      const originalPost = await PostModel.findById(id);
+        const originalPost = await PostModel.findById(id);
 
-      const doc = await PostModel.updateOne({_id: id}, {
-          title: request.body.title || originalPost?.title,
-          text: request.body.text || originalPost?.text,
-          imageUrl: request.body.imageUrl || originalPost?.imageUrl,
-          tags: request.body.tags  || originalPost?.tags,
-          author: (request as Request & { userId: string }).userId || originalPost?.author
-      });
+        const doc = await PostModel.updateOne({_id: id}, {
+            title: request.body.title || originalPost?.title,
+            text: request.body.text || originalPost?.text,
+            imageUrl: request.body.imageUrl || originalPost?.imageUrl,
+            tags: request.body.tags || originalPost?.tags,
+            author: (request as Request & { userId: string }).userId || originalPost?.author
+        });
 
-      response.json({
-          success: true
-      });
-  }  catch (error) {
-      console.error(error);
-      response.status(500).json({
-          success: false,
-          error: 'Unable to update post'
-      });
-  }
+        response.json({
+            success: true
+        });
+    } catch (error) {
+        console.error(error);
+        response.status(500).json({
+            success: false,
+            error: 'Unable to update post'
+        });
+    }
+};
+
+export const getLastTags = async (request: Request, response: Response<TagsResponse>) => {
+    const tagsNumber = 4;
+
+    try {
+        const posts: Post[] = await PostModel.find().limit(tagsNumber * 10).exec();
+
+        const allTags: string[] = posts.map((post: Post): string[] => post.tags).flat();
+        const tags: string[] = [...new Set<string>(allTags)].slice(0, tagsNumber);
+
+        response.json({
+            success: true,
+            tags: tags
+        });
+    } catch (error) {
+        console.error(error);
+        response.status(500).json({
+            success: false,
+            error: 'Unable to get tags'
+        });
+    }
 };

@@ -13,6 +13,8 @@ import { AboutMeResponse } from '../types/Me';
 const jwtEncryptKey: string = process.env.JWT_KEY as string;
 const jwtTokenDuration: string = process.env.JWT_TOKEN_DURATION as string;
 
+console.log(jwtEncryptKey);
+
 export const register = async (request: Request<{}, {}, RegisterRequest>, response: Response<RegisterResponse>) => {
     try {
         const salt: string = await bcrypt.genSalt(10);
