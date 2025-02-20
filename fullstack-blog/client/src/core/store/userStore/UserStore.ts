@@ -4,6 +4,7 @@ import { User } from '../../types/User';
 import { userTypeGuard } from '../../types/guards/userTypeGuard';
 import { LoginResponse } from '../../types/serverResponses';
 import { API } from '../../api';
+import { LoadingStatus } from '../../types/LoadingStatus';
 
 class UserStore {
     private static LOCAL_STORAGE_USER_KEY = 'current_authorized_user';
@@ -11,6 +12,7 @@ class UserStore {
 
     public user: User | null = null;
     public token: string | null = null;
+    public authLoadingStatus: LoadingStatus = LoadingStatus.NOT_LOADED;
 
     public constructor() {
         runInAction(() => {
@@ -21,15 +23,21 @@ class UserStore {
         makeObservable(this, {
             user: observable,
             token: observable,
+            authLoadingStatus: observable,
             tryAuthorize: action.bound,
             logOut: action.bound
         });
     }
 
     public async tryAuthorize(data: LoginRequest): Promise<void> {
+        this.authLoadingStatus = LoadingStatus.LOADING;
+
         const response: LoginResponse = await API.login(data);
 
+        this.authLoadingStatus = LoadingStatus.LOADED;
+
         if (!response.success) {
+            this.authLoadingStatus = LoadingStatus.ERROR;
             return;
         }
 
@@ -88,8 +96,13 @@ class UserStore {
 
     private saveUserAndToken(): void {
         try {
-            this.user && localStorage.setItem(UserStore.LOCAL_STORAGE_USER_KEY, JSON.stringify(this.user));
-            this.token && localStorage.setItem(UserStore.LOCAL_STORAGE_USER_KEY, this.token);
+            if (this.user) {
+                localStorage.setItem(UserStore.LOCAL_STORAGE_USER_KEY, JSON.stringify(this.user));
+            }
+
+            if (this.token) {
+                localStorage.setItem(UserStore.LOCAL_STORAGE_TOKEN_KEY, this.token);
+            }
         } catch (error) {
             console.error(error);
         }

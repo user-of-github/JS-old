@@ -35,8 +35,8 @@ export const HomePage = observer(() => {
     return (
         <>
             <Tabs style={{marginBottom: 15}} value={0} aria-label="basic tabs example">
-                <Tab label="Новые"/>
-                <Tab label="Популярные"/>
+                <Tab label="New"/>
+                <Tab label="Popular"/>
             </Tabs>
             <Grid container spacing={4} item>
                 <Grid xs={8} item>

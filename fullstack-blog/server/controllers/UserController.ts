@@ -49,6 +49,7 @@ export const register = async (request: Request<{}, {}, RegisterRequest>, respon
 
 export const logIn = async (request: Request<{}, {}, LoginRequest>, response: Response<LoginResponse>) => {
     try {
+        console.dir(request.body)
         const user = await UserModel.findOne({email: request.body.email}) as UserDocument;
 
         if (!user) {

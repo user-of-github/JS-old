@@ -35,6 +35,7 @@ export namespace API {
     };
 
     export const login = async (data: LoginRequest): Promise<LoginResponse> => {
+        console.log(data)
         const response = await requestToServer<LoginResponse>({
             path: `/auth/login`,
             method: 'post',

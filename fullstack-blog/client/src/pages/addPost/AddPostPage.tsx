@@ -24,7 +24,7 @@ export const AddPostPage = (): JSX.Element => {
             spellChecker: false,
             maxHeight: '400px',
             autofocus: true,
-            placeholder: 'Введите текст...',
+            placeholder: 'Insert text',
             status: false,
             autosave: {
                 enabled: true,
@@ -35,12 +35,12 @@ export const AddPostPage = (): JSX.Element => {
     return (
         <Paper style={{ padding: 30 }}>
             <Button variant="outlined" size="large">
-                Загрузить превью
+                Load preview
             </Button>
             <input type="file" onChange={handleChangeFile} hidden />
             {imageUrl && (
                 <Button variant="contained" color="error" onClick={onClickRemoveImage}>
-                    Удалить
+                    Remove
                 </Button>
             )}
             {imageUrl && (
@@ -51,17 +51,17 @@ export const AddPostPage = (): JSX.Element => {
             <TextField
                 classes={{ root: styles.title }}
                 variant="standard"
-                placeholder="Заголовок статьи..."
+                placeholder="Post title"
                 fullWidth
             />
             <TextField classes={{ root: styles.tags }} variant="standard" placeholder="Тэги" fullWidth />
             <SimpleMDE className={styles.editor} value={value} onChange={onChange} options={options} />
             <div className={styles.buttons}>
                 <Button size="large" variant="contained">
-                    Опубликовать
+                    Publish
                 </Button>
                 <a href="/">
-                    <Button size="large">Отмена</Button>
+                    <Button size="large">Cancel</Button>
                 </a>
             </div>
         </Paper>

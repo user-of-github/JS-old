@@ -42,7 +42,7 @@ app.post('/upload', isAuthorized, upload.single('image'), async (request: Reques
 });
 
 app.post('/auth/register', Validator.registerValidator, handleValidatorErrors, UserController.register);
-app.post('/auth/login', Validator.loginValidator, handleValidatorErrors, UserController.logIn);
+app.post('/auth/login',  UserController.logIn);
 app.get('/auth/me', isAuthorized, UserController.getMe);
 
 app.get('/posts', PostController.getAllPosts);

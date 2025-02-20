@@ -1,9 +1,9 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
+import { useParams } from 'react-router-dom';
 import { PostViewer } from '../../components/postViewer/PostViewer';
 import { AddComment } from '../../components/addComment/AddComment';
 import { CommentsBlock } from '../../components/commentsBlock/CommentsBlock';
-import { useParams } from 'react-router-dom';
 import { Post } from '../../core/types/Post';
 import { usePostsStore } from '../../core/store/postsStore/PostsStoreContext';
 
@@ -19,13 +19,10 @@ export const FullPostPage = observer((): JSX.Element => {
 
     const loadPost = async (): Promise<void> => {
         const loadedPost = await store.getPostById(id || '');
-        console.info(loadedPost)
         setPost(loadedPost);
     };
 
-    React.useEffect(() => {
-        loadPost();
-    }, []);
+    React.useEffect(() => void loadPost(), []);
 
     return (
         <>
@@ -36,10 +33,7 @@ export const FullPostPage = observer((): JSX.Element => {
                     :
                     <PostViewer isLoading={true}/>
             }
-            <CommentsBlock
-                comments={[]}
-                isLoading={false}
-            >
+            <CommentsBlock comments={[]} isLoading={false}>
                 <AddComment/>
             </CommentsBlock>
         </>
